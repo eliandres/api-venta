@@ -90,7 +90,7 @@ namespace Api.Controllers
             
         }
 
-        [HttpPost]
+        [HttpPost]//esto es validacion
         public string EncriptarContrasena(string contrasena)
     {
         using (SHA256 sha256Hash = SHA256.Create())

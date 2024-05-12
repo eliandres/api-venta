@@ -44,6 +44,7 @@ namespace Api.Controllers
                     {
                         listaUsuarios.Add(new Usuario//modelo
                         {
+                            IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
                             NombreUsuario = reader["NombreUsuario"].ToString(),
                             Contrasena = reader["Contrasena"].ToString(),
                             NombrePersonal = reader["NombrePersonal"].ToString(),
@@ -62,7 +63,8 @@ namespace Api.Controllers
                     var secreByter = Encoding.UTF8.GetBytes(secretaKey);
                     var claims = new ClaimsIdentity();
                     claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuario.NombreUsuario));
-                    claims.AddClaim(new Claim(ClaimTypes.Name, usuario.NombrePersonal));
+                    claims.AddClaim(new Claim(ClaimTypes.Actor, usuario.NombrePersonal));
+                    claims.AddClaim(new Claim(ClaimTypes.Name, Convert.ToString(usuario.IdUsuario)));
                     claims.AddClaim(new Claim(ClaimTypes.MobilePhone, usuario.Telefono));
                     claims.AddClaim(new Claim(ClaimTypes.PostalCode, usuario.CorreoElectronico));
                     var token = new SecurityTokenDescriptor

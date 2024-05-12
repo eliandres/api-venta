@@ -5,9 +5,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 var misReglasCors = "ReglasCors";
 
 builder.Services.AddCors(option =>
@@ -23,22 +21,26 @@ builder.Configuration.AddJsonFile("appsettings.json");
 var secret = builder.Configuration.GetSection("settings").GetSection("secretaKey").ToString();
 var keybiter = Encoding.UTF8.GetBytes(secret);
 
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer( config =>
+}).AddJwtBearer(config =>
 {
-    config.RequireHttpsMetadata = false;//en caso que fuera htpps cambiar a true
+    config.RequireHttpsMetadata = false; // Habilitar la validación de HTTPS en producción
     config.SaveToken = true;
     config.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(keybiter),
-        ValidateIssuer = false,
-        ValidateAudience = false,
+        ValidateIssuer = false, // Habilitar la validación del emisor
+        ValidIssuer = builder.Configuration["Jwt:Issuer"], // Especificar el emisor válido
+        ValidateAudience = false, // Habilitar la validación de la audiencia
+        ValidAudience = builder.Configuration["Jwt:Audience"], // Especificar la audiencia válida
     };
 });
+
 
 // Agregar la configuración de Swagger
 builder.Services.AddSwaggerGen(c =>

@@ -1,0 +1,7 @@
+Sintema de Ventas
+Creado con ASP. NET CORE
+C#
+Swagger
+JWT - TOKEN
+SQL SERVER
+WEB API RESS: GET, PUT, DELETE y POST

@@ -369,4 +369,5 @@ Api/Config
 Api/Repository
 
 ##Contraseña
+*.json
 Api/*.json

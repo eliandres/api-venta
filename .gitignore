@@ -369,4 +369,4 @@ Api/Config
 Api/Repository
 
 ##Contraseña
-Api/appsettings.json
+Api/*.json

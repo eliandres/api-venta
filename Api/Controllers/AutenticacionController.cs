@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Api.Models;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
@@ -25,7 +24,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("autenticacion")]
-        public IActionResult autenticar([FromBody] Usuario request)
+        public IActionResult Autenticar([FromBody] Usuario request)
         {
             List<Usuario> listaUsuarios = new List<Usuario>();
             string contrasenaEncriptada = EncriptarContrasena(request.Contrasena);

@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading;
 
 namespace Api.Filter
 {
@@ -15,9 +12,28 @@ namespace Api.Filter
         {
             try {
                 var identity = filterContext.HttpContext.User;
+
+                var userData = identity.Claims.Where(c => c.Type == ClaimTypes.Name)
+              .Select(c => c.Value).SingleOrDefault();
+
+                if (userData == null)
+                {
+                    filterContext.Result = new UnauthorizedResult();
+                    return;
+                }
+
+                if (int.TryParse(userData, out var userId))
+                {
+                    userId = int.Parse(userData);
+                }
+
+                //if (_permiso.FiltrarPermisoxIdUsuarioxIdPermiso(userId, IdPermiso))
+                //{
+                //    filterContext.Result = new UnauthorizedResult();
+                //}
             }
-            catch (Exception error){ 
-            
+            catch (Exception error){
+                throw error;
             }
         }
    

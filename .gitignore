@@ -367,3 +367,6 @@ Api/Config
 #Repositorios
 
 Api/Repository
+
+##Contraseña
+Api/appsettings.json

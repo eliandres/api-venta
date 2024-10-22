@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.Filter;
 using Api.Models;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Authorization;
 using Api.Repository;
-using Api.Filter;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
@@ -21,12 +21,13 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [ComprobarAutorizacion(IdPermiso = "OBTENER_ORGANIZACION")]
+        [ComprobarAutorizacion(IdPermiso = "OBTENER_PRODUCTO")]
         [Route("obtener")]
-        public IActionResult Obtener() {
+        public async Task<IActionResult> Obtener()
+        {
             try
             {
-                var lista = _productoRepository.Obtener();
+                var lista = await _productoRepository.Obtener();
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "Éxito", data = lista });
             }
             catch (Exception error)
@@ -38,11 +39,11 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("obtener/{idproducto:int}")]
-        public IActionResult ObtenerId(int idproducto)
+        public async Task<IActionResult> ObtenerId(int idproducto)
         {
             try
             {
-                var producto = _productoRepository.ObtenerPorId(idproducto);
+                var producto =  await _productoRepository.ObtenerPorId(idproducto);
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "Éxito", data = producto });
             }
             catch (Exception error)
@@ -53,7 +54,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("Insertar")]
-        public IActionResult Insertar([FromBody] Productos productos)
+        public  IActionResult  Insertar([FromBody] Productos productos)
         {
             try
             {

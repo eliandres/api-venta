@@ -4,13 +4,14 @@ using System.Security.Claims;
 
 namespace Api.Filter
 {
-    public class ComprobarAutorizacion: ActionFilterAttribute
+    public class ComprobarAutorizacion : ActionFilterAttribute
     {
-          public string IdPermiso { get; set; }
+        public string IdPermiso { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            try {
+            try
+            {
                 var identity = filterContext.HttpContext.User;
 
                 var userData = identity.Claims.Where(c => c.Type == ClaimTypes.Name)
@@ -32,10 +33,11 @@ namespace Api.Filter
                 //    filterContext.Result = new UnauthorizedResult();
                 //}
             }
-            catch (Exception error){
+            catch (Exception error)
+            {
                 throw error;
             }
         }
-   
+
     }
 }

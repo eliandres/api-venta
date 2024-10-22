@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Api.Models;
-using System.Text;
+﻿using Api.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
 using System.Data.SqlClient;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Api.Controllers
 {
@@ -88,25 +88,25 @@ namespace Api.Controllers
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new { token = "Correo/Usuario no válido" });
             }
-            
+
         }
 
         [HttpPost]//esto es validacion
         public string EncriptarContrasena(string contrasena)
-    {
-        using (SHA256 sha256Hash = SHA256.Create())
         {
-            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(contrasena));
-
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < bytes.Length; i++)
+            using (SHA256 sha256Hash = SHA256.Create())
             {
-                builder.Append(bytes[i].ToString("x2"));
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(contrasena));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
-            return builder.ToString();
         }
+
+
     }
-
-
-}
 }

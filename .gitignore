@@ -371,3 +371,7 @@ Api/Repository
 ##Contraseña
 *.json
 Api/*.json
+
+## FROMTEND Eliminar
+www
+

@@ -54,12 +54,12 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("Insertar")]
-        public  IActionResult  Insertar([FromBody] Productos productos)
+        public  IActionResult Insertar([FromBody] Productos productos)
         {
             try
             {
                 _productoRepository.Insertar(productos);
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Éxito" });
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Producto insertado exitosamente" });
             }
             catch (Exception error)
             {
@@ -93,7 +93,7 @@ namespace Api.Controllers
             try
             {
                 _productoRepository.Eliminar(IdProducto);
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Éxito" });
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Producto eliminado exitosament" });
             }
             catch (Exception error)
             {

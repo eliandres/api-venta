@@ -362,16 +362,16 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 #Configuracion
-Api/Config
+#Api/Config
 
 #Repositorios
 
-Api/Repository
+#Api/Repository
 
 ##Contraseña
 *.json
 Api/*.json
 
 ## FROMTEND Eliminar
-www
+#www
 
